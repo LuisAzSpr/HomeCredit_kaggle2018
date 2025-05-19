@@ -14,14 +14,14 @@ Tenemos 3 funciones:
 
 - EDA_graf_numericas : Nos da 2 graficas, la primera es la distribucion de la variable numerica, la segunda son 2 distribuciones para cada segmento 'cumplen' y 'no incumplen'.
 
-- graficar_EDA : Apartir de una lista de variables, se escoge cualquiera de las 2 funciones anteriores para graficarlas, dependiendo de su tipo, si es categorica se usa la variable max_cat que se le pasara como parametro a la funcion EDA_graf_categoricas como vimos anteriormente.
+- graficar_EDA_target : Apartir de una lista de variables, se escoge cualquiera de las 2 funciones anteriores para graficarlas, dependiendo de su tipo, si es categorica se usa la variable max_cat que se le pasara como parametro a la funcion EDA_graf_categoricas como vimos anteriormente.
 
 '''
 
 
 
 # Grafica para variables categorica y target binario
-def EDA_graf_categoricas(
+def EDA_graf_categoricas_target(
     df_,
     target: str,
     variable: str,
@@ -101,7 +101,7 @@ def EDA_graf_categoricas(
     plt.show()
     
 # Grafica para variables numericas y target binario
-def EDA_graf_numericas(df_,target,variable):
+def EDA_graf_numericas_target(df_,target,variable):
     """
     Grafica:
       - Distribucion de la variable numerica sin contar el 0.1% restante (outliers)
@@ -129,12 +129,12 @@ def EDA_graf_numericas(df_,target,variable):
     plt.show()
 
 # Graficas para un target binario
-def graficar_EDA(df,target,variables,max_cat=8):
+def graficar_EDA_target(df,target,variables,max_cat=8):
     for variable in variables:
         if df[variable].dtype=='O' or df[variable].nunique()<10:
-            EDA_graf_categoricas(df_=df,target=target,variable=variable,top_n=max_cat)
+            EDA_graf_categoricas_target(df_=df,target=target,variable=variable,top_n=max_cat)
         else:
-            EDA_graf_numericas(df,target,variable)
+            EDA_graf_numericas_target(df,target,variable)
             
 # Descripcion de variables categoricas
 def describe_categoricas(df_,variables,hide=False):
